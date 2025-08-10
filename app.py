@@ -4,17 +4,19 @@ from collections import Counter
 from io import BytesIO
 
 def get_font_name(run, para):
-    # Try run font first
+    # Check run font first
     if run.font and run.font.name:
         return run.font.name
-    # Fallback to paragraph style font name
+    # Fallback to paragraph style font
     if para.style and para.style.font and para.style.font.name:
         return para.style.font.name
     return "Default"
 
 def get_font_size(run, para):
+    # Check run font size
     if run.font and run.font.size:
         return run.font.size.pt
+    # Fallback to paragraph style font size
     if para.style and para.style.font and para.style.font.size:
         size = para.style.font.size
         if size:
@@ -57,3 +59,5 @@ if uploaded_file is not None:
     st.subheader("Font Size Distribution (%)")
     for font_size, perc in font_size_percent.items():
         st.write(f"{font_size} pt: {perc}%")
+        
+    st.info("Note: Some font sizes may show as 'Default' if not explicitly set in the document due to Word style inheritance limitations.")
