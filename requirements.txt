@@ -1,4 +1,4 @@
 streamlit
-panda
 python-docx
 python
+panda
